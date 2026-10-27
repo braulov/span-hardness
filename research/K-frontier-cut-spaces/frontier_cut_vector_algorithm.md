@@ -72,14 +72,14 @@ m\cdot2^{\ell+O(1)}D^{O(1)}\operatorname{poly}(S)=2^{O(f+\ell)}\operatorname{pol
 
 ## 3. Why the method handles XOR
 
-A width-two layered, read-once parity BP has two states at each layer, with the switch \(x_i\) controlling the two outgoing transitions between layers \(i\) and \(i+1\). The direct two-sink BP-to-LGS gadget in \`research/6.1-winwin/williams.md\` adds one permanent selected edge from the start to the reject sink and one permanently unselected edge between the sinks. Process the selected permanent edge first, and then the BP transition edges layer by layer, placing all occurrences of \(x_i\) consecutively. The host vertex frontier has constant size (two neighboring layers plus the sink/root), and only one switch is temporarily live. Thus \(w=O(1)\), giving a polynomial-time LGS solver.
+A width-two layered, read-once parity BP has two states at each layer, with the switch \(x_i\) controlling the two outgoing transitions between layers \(i\) and \(i+1\). The direct two-sink BP-to-LGS gadget in `research/6.1-winwin/williams.md` adds one permanent selected edge from the start to the reject sink and one permanently unselected edge between the sinks. Process the selected permanent edge first, and then the BP transition edges layer by layer, placing all occurrences of \(x_i\) consecutively. The host vertex frontier has constant size (two neighboring layers plus the sink/root), and only one switch is temporarily live. Thus \(w=O(1)\), giving a polynomial-time LGS solver.
 
 By comparison, the cut-clause representation from branch J has minimum necessary clause width \(p\) for the same parity predicate. The new algorithm therefore genuinely overcomes the **specific** obstruction in J.
 
 
 ### Corollary: layered branching programs with many rereads
 
-Suppose a layered *deterministic* BP has at most \(W\) vertices per layer and all outgoing transitions in layer \(j\) query the same variable \(x_{i_j}\) (an oblivious variable schedule). Let \(a\) be the maximum, over layer cuts, of the number of variables queried both before and after the cut. No bound on the total read count of one variable is required. Encode BP through the exact two-sink LGS gadget from \`research/6.1-winwin/williams.md\` and process its edges layer by layer, with permanent selected sink edge first. The vertex frontier is \(O(W)\) (the two neighboring state layers plus at most the two sinks), and the live switch frontier is at most \(a+1\). Hence **BP-SAT is deterministic in**
+Suppose a layered *deterministic* BP has at most \(W\) vertices per layer and all outgoing transitions in layer \(j\) query the same variable \(x_{i_j}\) (an oblivious variable schedule). Let \(a\) be the maximum, over layer cuts, of the number of variables queried both before and after the cut. No bound on the total read count of one variable is required. Encode BP through the exact two-sink LGS gadget from `research/6.1-winwin/williams.md` and process its edges layer by layer, with permanent selected sink edge first. The vertex frontier is \(O(W)\) (the two neighboring state layers plus at most the two sinks), and the live switch frontier is at most \(a+1\). Hence **BP-SAT is deterministic in**
 
 \[
 2^{O(W+a)}\operatorname{poly}(S).
