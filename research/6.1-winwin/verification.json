@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "scope": "finite elementary identities only; external theorems not replayed",
+  "graphic_cographic_cases": 760,
+  "long_clause_cases": 12440,
+  "cycle_merge_cases": 29366,
+  "ring_rank_cases": 446,
+  "root_gadget_cases": 2153,
+  "isolation_probability_cases": 18,
+  "branching_program_span_cases": 12144,
+  "exact_cnf_cancellation_cases": 819
+}
