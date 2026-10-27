@@ -6,12 +6,12 @@ Work as a theoretical computer scientist on a concrete **algorithmic** problem. 
 
 Private repository: https://github.com/braulov/span-hardness
 
-Branch: \`research/I-LGS-algorithms\`. Start with:
-- \`research/I-LGS-algorithms/README.md\` — detailed problem, new small-deficiency identity, baselines, literature, research paths.
-- \`research/6.1-winwin/williams.md\` — exact input-preserving branching-program-to-graphic-span reduction (Lemma 6) and proposed Williams-style circuit-lower-bound transfer (Theorem 10).
-- \`research/6.1-winwin/parity_rank.md\` — parity lift and rank witnesses.
-- \`research/6.1-winwin/research_checkpoint_ru.md\` — status and parameter ledger.
-- \`research/H-derandomization-algorithms/derandomization_and_matrix_lifts.md\` — bounded-deficiency deterministic exact counts.
+Branch: `research/I-LGS-algorithms`. Start with:
+- `research/I-LGS-algorithms/README.md` — detailed problem, new small-deficiency identity, baselines, literature, research paths.
+- `research/6.1-winwin/williams.md` — exact input-preserving branching-program-to-graphic-span reduction (Lemma 6) and proposed Williams-style circuit-lower-bound transfer (Theorem 10).
+- `research/6.1-winwin/parity_rank.md` — parity lift and rank witnesses.
+- `research/6.1-winwin/research_checkpoint_ru.md` — status and parameter ledger.
+- `research/H-derandomization-algorithms/derandomization_and_matrix_lifts.md` — bounded-deficiency deterministic exact counts.
 
 If private GitHub access fails, work from this self-contained definition: given a connected undirected multigraph G of S=|V|+|E| objects, p Boolean input bits x_1,...,x_p, each edge labeled by 0,1,x_i, or NOT x_i, ask whether some assignment makes the active edges connected. This is Literal Graphic Span-SAT (LGS), equivalently selected edges have full rank in the graphic matroid.
 
@@ -55,6 +55,6 @@ E. If a concrete LGS avenue fails, identify an adjacent **algorithmic** conseque
 - Use precise existing lower bounds and reduction directions.
 - Give several mathematically serious iterations, not merely an overview.
 - Output a research checkpoint with (i) proved algorithmic advances, (ii) attempted methods and exact blockers, (iii) best quantitative target and next experiments.
-- Save to a new branch \`research/claude-LGS\` and leave main untouched, if GitHub writes are available. Otherwise output complete Markdown notes.
+- Save to a new branch `research/claude-LGS` and leave main untouched, if GitHub writes are available. Otherwise output complete Markdown notes.
 
 The goal is a robust algorithmic result, not to defend any conjecture.
