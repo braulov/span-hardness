@@ -76,6 +76,17 @@ A width-two layered, read-once parity BP has two states at each layer, with the 
 
 By comparison, the cut-clause representation from branch J has minimum necessary clause width \(p\) for the same parity predicate. The new algorithm therefore genuinely overcomes the **specific** obstruction in J.
 
+
+### Corollary: layered branching programs with many rereads
+
+Suppose a layered *deterministic* BP has at most \(W\) vertices per layer and all outgoing transitions in layer \(j\) query the same variable \(x_{i_j}\) (an oblivious variable schedule). Let \(a\) be the maximum, over layer cuts, of the number of variables queried both before and after the cut. No bound on the total read count of one variable is required. Encode BP through the exact two-sink LGS gadget from \`research/6.1-winwin/williams.md\` and process its edges layer by layer, with permanent selected sink edge first. The vertex frontier is \(O(W)\) (the two neighboring state layers plus at most the two sinks), and the live switch frontier is at most \(a+1\). Hence **BP-SAT is deterministic in**
+
+\[
+2^{O(W+a)}\operatorname{poly}(S).
+\]
+
+This is polynomial for constant \(W,a\), and \(2^{o(p)}\operatorname{poly}(S)\) whenever \(W+a=o(p)\), even for length \(p^{100}\) and variables read a superconstant or polynomial number of times. The condition differs from constant syntactic read-\(k\), but should be compared carefully with classical automata/variable-elimination dynamic programming before claiming novelty.
+
 ## 4. Why this does NOT solve unrestricted LGS
 
 The width can be \(\Omega(p)\) even for easy LGS predicates. Take \(K_{p,p}\), with left vertices \(a_1,\ldots,a_p\) and right vertices \(b_1,\ldots,b_p\), and label every edge \(a_ib_j\) by \(x_i\). Connectedness is equivalent to \(\bigwedge_i x_i\), a trivially easy predicate.
