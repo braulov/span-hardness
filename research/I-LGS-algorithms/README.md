@@ -2,7 +2,7 @@
 
 ## What to read, in order
 
-This branch is **based on** \`research/H-derandomization-algorithms\`, which itself is based on \`research/6.1-winwin\`; all inherited files are present in the branch.
+This branch is **based on** `research/H-derandomization-algorithms`, which itself is based on `research/6.1-winwin`; all inherited files are present in the branch.
 
 1. [The core BP -> literal graphic full-span construction and Williams consequence](../6.1-winwin/williams.md), especially §§4–7, Lemma 6, Theorem 10, and the exact quantifiers on \(p,S\).
 2. [Algorithmic research checkpoint](../6.1-winwin/research_checkpoint_ru.md), especially §11 and the parameter ledger in §§3, 9, 12.
@@ -22,7 +22,7 @@ Literal LGS includes BP-SAT by a precise linear-size input-preserving reduction;
 
 ## New observation for the BP reduction: deficiency is ALWAYS 0 or 1
 
-The proof in \`williams.md\`, Lemma 6, builds an active forest of exactly two components (accept and reject sinks) plus the permanent selected edge \((s,r)\), where \(s\) is the BP start and \(r\) its reject sink. A never-selected edge \((a,r)\) (accept and reject sinks) connects the *ground* graph, without changing active choices. For every input \(x\),
+The proof in `williams.md`, Lemma 6, builds an active forest of exactly two components (accept and reject sinks) plus the permanent selected edge \((s,r)\), where \(s\) is the BP start and \(r\) its reject sink. A never-selected edge \((a,r)\) (accept and reject sinks) connects the *ground* graph, without changing active choices. For every input \(x\),
 
 \[
 d(x):=r_G(E)-r_G(Y(x))=
@@ -64,8 +64,8 @@ For \(S=O(p\log^\alpha p)\) with fixed \(\alpha<1/2\), this is nonetheless a con
 
 ## Deliverables and working rules
 
-Produce exact theorems/lemmas with explicit \(p,S,q,m\) and running times. Try constructions or counterexamples, not just surveys. Track proven/conditional/speculative claims. If the general goal is blocked, extract one nontrivial wider BP class. Tests on tiny BPs are useful but not substitutes for proofs. Keep all work on a new research branch, preferably \`research/claude-LGS\`; do not modify main or the 6.1/H checkpoints without permission. Leave one reproducible Markdown checkpoint with failed attempts and next experiments.
+Produce exact theorems/lemmas with explicit \(p,S,q,m\) and running times. Try constructions or counterexamples, not just surveys. Track proven/conditional/speculative claims. If the general goal is blocked, extract one nontrivial wider BP class. Tests on tiny BPs are useful but not substitutes for proofs. Keep all work on a new research branch, preferably `research/claude-LGS`; do not modify main or the 6.1/H checkpoints without permission. Leave one reproducible Markdown checkpoint with failed attempts and next experiments.
 
 ## Conspicuous open audit point
 
-The \`williams.md\` argument \(\mathrm{LGS}\text{-}\mathrm{SAT}\in2^{o(p)}\mathrm{poly}(S)\Rightarrow \mathrm{NEXP}\not\subseteq\mathrm{L/poly}\) uses a logspace indexed tableau and an easy-witness transfer. Check every quantifier/closure and whether this precise circuit separation is already established via prior SAT algorithms. Do not treat the implication or novelty as peer-reviewed fact.
+The `williams.md` argument \(\mathrm{LGS}\text{-}\mathrm{SAT}\in2^{o(p)}\mathrm{poly}(S)\Rightarrow \mathrm{NEXP}\not\subseteq\mathrm{L/poly}\) uses a logspace indexed tableau and an easy-witness transfer. Check every quantifier/closure and whether this precise circuit separation is already established via prior SAT algorithms. Do not treat the implication or novelty as peer-reviewed fact.
