@@ -69,6 +69,9 @@ Sanity checks in the working research session:
 - A literal-labeled cactus on five vertices, sixteen assignments, checked equality F_2(x)=Connected(G_x); all passed.
 - For parity p=2,...,5, verified that no nontrivial implied clause has width <p; width-p CNF has 2^{p-1} clauses. Tests supplement proofs; no external theorem tested.
 
+
+Additional check using the ACTUAL two-sink BP-to-LGS graph gadget for p-bit odd parity: for p=2,3,4,5, tested all 2^p assignments, verified acceptance iff selected graph is connected, and computed min cut-label widths for every rejecting assignment. They were exactly p in every case. Thus the parity obstruction appears in the concrete graph encoding, not just in an abstract Boolean CNF.
+
 ## 6. Next attack
 
 The clean two-track algorithmic target is now:
