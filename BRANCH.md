@@ -1,0 +1,3 @@
+# Research branch G — Beyond-ETH win-win
+
+**Goal:** formulate a nontrivial replacement for ETH whose falsity implies a NEW nonuniform circuit lower bound beyond the Williams E^NP linear-circuit consequence already associated with ETH. Study input-efficient Span feasibility and Circuit-SAT(n,n^k) reductions with controlled primary bits and structure size. The desired bridge and target reductions are OPEN. Main notes: docs/11_eth_replacement_winwin.md and docs/11_eth_replacement_and_circuit_winwin.md.
