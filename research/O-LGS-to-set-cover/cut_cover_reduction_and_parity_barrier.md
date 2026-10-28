@@ -83,3 +83,10 @@ Maintain a sharp distinction among fixed k-Set Cover, arbitrary-set-size Set Cov
 3. https://doi.org/10.1145/3618260.3649620 (Pratt, STOC 2024)
 4. https://borowiecki.dev/abs/2609.39062 (Koana–Kumabe, directed HC, October 2026 revision)
 5. https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SoCG.2026.77 (restricted geometric HC)
+
+
+## 7. Auxiliary choices can completely repair the parity example
+
+The direct cut-cover lower bound is **not** a lower bound on the smallest Set Cover encoding of the same Boolean predicate. Odd parity on p inputs has a bounded-fanin circuit of O(p) XOR gates. Introduce y_i for prefix parity, impose y_i = y_{i-1} XOR x_i using four constant-width CNF clauses per step, pin y_0=0,y_p=1, and use the standard variable/constraint CNF-to-SetCover conversion. There are O(p) Boolean variables and clauses, hence O(p) Set Cover universe elements and O(p) candidate sets; budget O(p). By contrast, the direct no-auxiliary cut-CNF needs at least 2^{p-1} cut elements.
+
+**Baseline lemma.** If an LGS acceptance predicate has a Boolean circuit on p inputs of size g, then standard uniquely extended gate-CNF and clause-to-SetCover construction yields Set Cover universe O(p+g), candidate sets O(p+g), in polynomial time. For a BP of size S, g=O(S) is trivial; the research target is achieving O(p) universe for **all** polynomial-size BPs without first materializing Theta(S) auxiliary constraints. This observation isolates the real compression difficulty.
