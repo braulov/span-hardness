@@ -55,6 +55,10 @@ A second exact identity: the number of nullspace certificates for a fixed assign
 
 The present SCGS hypothesis is **not yet** a strong ETH replacement: its failure implies at most the already available linear-circuit lower bound from 3-SAT. A substantially stronger circuit-lower-bound payoff would require **input-efficient compilation of polynomial-size Circuit-SAT** into a syntactically restricted span class, with 2^{o(n)} depending on genuine input bits rather than all auxiliary gates. The resulting conditional program, with correct reduction arrows and no dummy-matroid encodings, is in [`docs/11_eth_replacement_winwin.md`](docs/11_eth_replacement_winwin.md).
 
+## New: edge-bucket projection for counting tensors (2026-10-28)
+
+A proposed exact regrouping of incidence-indexed polynomial-counting tensors replaces per-block selected-incidence sets by their projected variable supports, with internal summation inside test-bucket tensors. On structured grouped-support instances this reduces the wire budget from the generic O(n loglog n) to O(n), *conditional on the October 2026 external tensor-contraction theorem* giving 2^{O(n/sqrt(log n))} counting time. There is **no universal dense-#SAT improvement** and **no NEXP lower bound** yet. Full proof, hybrid encoding, local-entry/precision audit, communication-rank obstruction, and concrete SAT/Circuit-SAT open problems: [`docs/12_projected_support_edge_buckets.md`](docs/12_projected_support_edge_buckets.md).
+
 ## Research branches
 
 All branches are also documented on `main`; independent Git topic branches keep experimental approaches apart.
