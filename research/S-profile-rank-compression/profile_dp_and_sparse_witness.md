@@ -136,3 +136,44 @@ Also study whether **richer summaries of a noncommutative block** can be factore
 - Barrington's theorem about width-5 permutation programs / NC1: https://doi.org/10.1016/0022-0000(89)90037-8 .
 
 **No NEXP vs L/poly separation or unrestricted LGS-to-SetCover(u=O(p)) reduction has been obtained.**
+
+
+## 9. Canonical A5 segmentation and optimal profile entropy
+
+This eliminates an important algorithmic ambiguity left open in §7, **specifically for normalized A5 group words**.
+
+**Lemma S4 (centralizer classification).** For each nonidentity \(g\in A_5\), its centralizer \(C_{A_5}(g)\) is abelian:
+- order-three element: centralizer \(C_3\);
+- order-five element: centralizer \(C_5\);
+- double transposition (order two): centralizer \(V_4\), the Klein-four group.
+
+Moreover, if nonidentity \(g,h\in A_5\) commute, their centralizers coincide. Proof: \(h\in C(g)\), and \(C(g)\) is abelian, so \(C(g)\subseteq C(h)\); the symmetrical inclusion follows from \(g\in C(h)\) and \(C(h)\) abelian. Thus commuting nonidentity factors have the same uniquely determined maximal abelian subgroup. The centralizer-size/commutativity classification can also be verified on all 60 elements, and is standard elementary finite-group theory.
+
+**Theorem S5 (optimal canonical partition).** For a normalized A5 word \(h_1^{x_{i_1}}\cdots h_L^{x_{i_L}}\), first delete instructions with \(h_t=1\). Partition the remaining word into maximal consecutive runs with the SAME centralizer \(C_{A_5}(h_t)\). Call its profile group \(K_*\). Then for EVERY alternative partition of the same word into consecutive segments with pairwise commuting elements within each segment, its profile group \(K\) obeys
+
+\[
+\boxed{|K_*|\le |K|}.
+\]
+
+Proof: by S4, every valid commuting segment must lie entirely in one canonical run. Hence an arbitrary valid partition is a REFINEMENT of the canonical partition. Merging two adjacent smaller segments of the same run, whose profile groups lie in one common abelian subgroup H, induces a group homomorphism on the product segment coordinates by \((a,b)\mapsto ab\). The merged profile vector for each input variable is exactly the image of its former profile vector. Therefore the new generated profile subgroup is the homomorphic image of the old one, and cannot have larger order. Repeatedly merge all refinement boundaries to obtain the canonical partition. QED.
+
+**Algorithmic corollary S6 (automatic optimal profile-width solver for A5).** The canonical segmentation is computed by an O(L)-time scan of normalized deltas with a constant group lookup table (including the Q baseline normalization when needed). Each run's centralizer is elementary abelian of exponent 2, 3 or 5. Express each variable's profile in \(F_2^{d_2}\times F_3^{d_3}\times F_5^{d_5}\). Gaussian elimination yields ranks \(k_2,k_3,k_5\) and
+
+\[
+|K_*|=2^{k_2}3^{k_3}5^{k_5},\qquad
+\rho_*(W)=k_2+k_3\log_2 3+k_5\log_2 5.
+\]
+
+The factorization of K_* into its primary components is valid as a subgroup of the finite abelian direct product, even though the BOOLEAN subset-sum image need not factor. Thus both \(\rho_*\) and the optimal canonical partition are efficiently computable in \(\mathrm{poly}(L,p)\) time. Combining exhaustive search and the profile DP gives a fully automatic exact-counting algorithm running in
+
+\[
+\boxed{2^{O(1)}\min(2^p,\;2^{k_2}3^{k_3}5^{k_5})\mathrm{poly}(L,p).}
+\]
+
+For \(\rho_*(W)=o(p)\), this is deterministic subexponential in the ORIGINAL number of independent switches.
+
+**Scope:** 'optimal' means among **consecutive partitions into internally commuting segments of the given normalized word**; the theorem does not optimize over arbitrary equivalent word rewritings, alternative group representations, input substitutions, noncommutative summary gadgets or general branching programs. All of those might yield strictly better compression.
+
+Validation: exact centralizer classification and the equality of commuting nonidentity centralizers were exhaustively checked over all A5 elements; the claimed optimality was checked by enumerating every valid consecutive segmentation of 100 random short A5 words and independently computing generated subgroup sizes. All tests passed, without supplying a proof of literature novelty.
+
+A5-specific side note: this canonicality can fail in S5, where centralizers of certain nonidentity permutations need not be abelian. Do not generalize S5's uniqueness claim to arbitrary finite groups.
