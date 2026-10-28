@@ -166,3 +166,42 @@ For p=1 interpret the formula trivially. This is a special case of exact quadrat
 - Filmus et al., *Harmonicity and Invariance on Slices of the Boolean Cube*, https://doi.org/10.1007/s00440-019-00900-w .
 - Classical full-rank subset inclusion matrices over characteristic zero (Gottlieb rank theorem).
 - Parent project: \`research/T-semantic-orbits/semantic_orbit_reduction_and_recognition_barrier.md\`.
+
+
+## 8. Extension beyond a single hidden exceptional set: moving dictatorships
+
+An instructive example with **no common small exceptional set** is
+
+\[
+f(x)=x_{|x|} \quad\text{for }|x|\ge1,\qquad f(0^p)=0,
+\]
+
+where indices are 1-based. On the weight-w slice it equals the single coordinate x_w, hence has slice degree one for EVERY w. However, the distinguished coordinate changes with w; the union of relevant coordinates over weights is \(\Omega(p)\), and there need not be one B of size o(p) making the whole function symmetric outside B. The U1/U2 exact-count algorithm still applies with b=1.
+
+For this function, at each w≥1 the number of accepting weight-w inputs is \(\binom{p-1}{w-1}\), so the total count is \(\sum_{w=1}^p\binom{p-1}{w-1}=2^{p-1}\). Thus \(\mathrm{SLD}_b\) is a genuinely broader semantic condition than hidden b-exception symmetry.
+
+### Theorem U5 (cyclic quadrature for ALL Boolean slice-degree-one functions)
+
+The b=1 cyclic formula from §6 in fact holds for **every Boolean f satisfying \(\mathrm{SLD}_1\)**, even if a different relevant coordinate occurs at every Hamming weight.
+
+Proof: on interior weight layers 2≤w≤p−2, a Boolean degree-one function on a Johnson slice is necessarily a constant, a dictator x_i, or its negation 1−x_i (the classical degree-one slice junta theorem; see Filmus–Ihringer 2019, Theorem 1.2). The cyclic rotations of s_w put coordinate i in state one for exactly w of the p rotations, so cyclic and full-slice averages agree for every such function. On extreme layers w∈{0,1,p−1,p}, cyclic shifts of s_w range over the ENTIRE layer (possibly with repetitions), so the averages agree for arbitrary Boolean functions. Summing layers proves the same p(p+1)-query formula for all \(\mathrm{SLD}_1\) Boolean functions, without any fixed B. QED.
+
+Finite test: 250 seeded random families of independently chosen weight-by-weight dictators/negated dictators/constants, with arbitrary Boolean functions at the w=1 and w=p−1 extreme layers, p≤11; the cyclic formula matched full enumeration in every case.
+
+## 9. A second group-design shortcut for degree two (prime number of inputs)
+
+**Theorem U6 (affine quadrature).** Suppose p is prime and f has slice degree ≤2, with no hidden-B assumption and without requiring f to be Boolean for the identity. Let \(\pi_{a,c}(i)=ai+c\pmod p\) on index set F_p, for a∈F_p^× and c∈F_p. Then
+
+\[
+\boxed{
+\sum_{x\in\{0,1\}^p} f(x)
+= \frac1{p(p-1)}\sum_{w=0}^p\binom pw
+    \sum_{a\ne0,\ c\in F_p} f(\pi_{a,c}\cdot s_w).
+}
+\]
+
+There are \(p(p-1)(p+1)=O(p^3)\) evaluation queries.
+
+Proof: AGL(1,p) acts **sharply two-transitively** on the p positions. Thus, for every weight-w base string and every fixed set T of at most two coordinate positions, the fraction of affine permutations sending all positions of T into the support of the permuted base equals (w)_{\underline{|T|}}/(p)_{\underline{|T|}}, exactly the average of the monomial x_T under the uniform weight-w slice. By linearity of expectation, the affine orbit average equals the full slice average for EVERY degree≤2 polynomial, proving the identity. QED.
+
+This is a conventional 2-design / sharply 2-transitive group argument and is not asserted novel. It gives a particularly simple exact #BP-SAT formula under the \(\mathrm{SLD}_2\) promise for prime p, with almost the same number of queries as our information-theoretically minimal chain-neighborhood interpolation, but no Gaussian elimination. For arbitrary p, U1 remains valid unconditionally.
