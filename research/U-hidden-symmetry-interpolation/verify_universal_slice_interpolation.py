@@ -120,3 +120,49 @@ def main():
     print("PASS 180 cyclic-shift exact-count identities")
 
 if __name__=="__main__":main()
+    verify_more_group_quadrature()
+
+
+
+def verify_more_group_quadrature():
+    """Boolean SLD1 with changing dictator; degree-two affine formula for primes."""
+    rng=Random(18272)
+    for p in range(2,12):
+        for trial in range(15):
+            indices=[rng.randrange(p) for _ in range(p+1)]
+            signs=[rng.randrange(2) for _ in range(p+1)]
+            extremal={}
+            for x in product((0,1),repeat=p):
+                if sum(x) in (1,p-1):extremal[x]=rng.randrange(2)
+            def f(x):
+                if x in extremal:return extremal[x]
+                return x[indices[sum(x)]] ^ signs[sum(x)]
+            expected=sum(f(x) for x in product((0,1),repeat=p))
+            assert cyclic_one_exception_count(p,f)==expected
+    print("PASS 150 moving-dictator cyclic identities")
+
+    for p in (3,5,7,11):
+        for trial in range(10):
+            spec={}
+            for w in range(p+1):
+                indexes=tuple(rng.sample(range(p),2))
+                table={z:rng.randrange(2) for z in product((0,1),repeat=2)}
+                spec[w]=(indexes,table)
+            extremal={}
+            for x in product((0,1),repeat=p):
+                if min(sum(x),p-sum(x))<=2:extremal[x]=rng.randrange(2)
+            def f(x):
+                if x in extremal:return extremal[x]
+                indexes,table=spec[sum(x)]
+                return table[tuple(x[i] for i in indexes)]
+            expected=sum(f(x) for x in product((0,1),repeat=p))
+            weighted=0
+            for w in range(p+1):
+                prefix=(1,)*w+(0,)*(p-w)
+                for a in range(1,p):
+                    for c in range(p):
+                        x=[0]*p
+                        for i in range(p):x[(a*i+c)%p]=prefix[i]
+                        weighted+=comb(p,w)*f(tuple(x))
+            assert weighted==p*(p-1)*expected
+    print("PASS 40 prime-field affine degree-two identities")
