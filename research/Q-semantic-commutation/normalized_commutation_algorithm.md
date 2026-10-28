@@ -129,3 +129,16 @@ The normality condition is essential to this argument: an exceptional fixed word
 For \(K_C=S_5\) or \(A_5\), the Fitting subgroup is trivial, so arbitrary Barrington-style hard cores are NOT handled. This is exactly where the approach must be strengthened to address the post-ETH project.
 
 **Verification:** 400 seeded random \(D_8\) group words acting on five states, with a normal Klein-four subgroup \(V_4\), were exhaustively checked over every input assignment for the exceptional/normal factorization; all passed. This does not implement or independently audit Goldmann–Russell's general nilpotent-group algorithm. Primary reference: Idziak–Kawałek–Krzaczkowski–Weiß, ICALP 2022, https://doi.org/10.4230/LIPIcs.ICALP.2022.127 .
+
+
+## 7. Exact obstruction at the Barrington A5 core
+
+The normalized component method has a sharp limitation in \(S_5\).
+
+**Lemma Q4.** If some interaction component \(C\) generates a subgroup containing \(A_5\), then every delta of every variable *outside* \(C\) is the identity. In particular, after dropping dummy variables, the interaction graph has just that one component.
+
+Proof: by definition any delta outside \(C\) commutes with every delta in \(C\), and hence lies in the centralizer \(C_{S_5}(\langle h_t:i_t\in C\rangle)\subseteq C_{S_5}(A_5)\). The latter centralizer is trivial: an element commuting with all 3-cycles must preserve every 3-element subset of \(\{1,\ldots,5\}\), and therefore fix every point. Thus the outside delta is identity. QED.
+
+Moreover the Fitting subgroup of \(A_5\) and of \(S_5\) is trivial, so the nilpotent-normal-core parameter of Q3 also offers no reduction in this case. These are algebraic obstructions **for our structural methods**, not lower bounds against arbitrary SAT algorithms.
+
+This points the research toward *partial A5/S5 noncommutative behavior* and a new way to summarize nested commutators, not simply more commuting-group components. Barrington's theorem explicitly uses a non-solvable group to simulate general logarithmic-depth computation.
