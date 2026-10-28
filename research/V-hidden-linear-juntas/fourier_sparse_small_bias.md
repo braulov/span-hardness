@@ -116,3 +116,22 @@ Relevant literature:
 - Kushilevitz–Mansour, *Learning Decision Trees Using the Fourier Spectrum*, SIAM J. Comput. 1993, https://doi.org/10.1137/0222080 .
 - De–Mossel–Neeman, *Is Your Function Low Dimensional?*, COLT 2019, https://proceedings.mlr.press/v99/de19a.html — studies (a different, real-domain) notion of linear k-junta and testing; do not equate its precise model with F2 linear juntas.
 - Older project: U chain-interpolation, T semantic orbits, S profile groups.
+
+
+## 7. Hardness of recognizing low XOR dimension, even when k is fixed
+
+A natural objection to the promise algorithm: can we verify that the learned quotient is actually correct on every input of an arbitrary BP? In general this is already coNP-complete.
+
+**Theorem V5.** For EVERY FIXED k≥0, given a polynomial-length width-five A5 permutation branching program specifying f:{0,1}^p→{0,1}, deciding whether the minimum number of F2-linear forms on which f depends is at most k is coNP-complete.
+
+Proof (hardness): from arbitrary CNF F(x), introduce k+1 fresh inputs z_1,...,z_{k+1}, and set h(x,z)=F(x) AND z_1 AND ... AND z_{k+1}. A balanced Boolean circuit for h has logarithmic depth and polynomial size, hence Barrington compiles it to a polynomial-length width-five A5 group program accepting exactly h=1. If F is UNSAT, h is zero, has XOR dimension zero. If F is SAT, choose x satisfying F and z=1^{k+1}. Any period v of h with any nonzero z-coordinate would take this accepting input to a rejecting input (regardless of the x-coordinates of v). Thus every period has its z-coordinates all zero. Its period space has codimension at least k+1, hence minimal XOR dimension>k.
+
+Membership in coNP for FIXED k: if the period quotient F2^p/P_f has dimension>k, choose k+1 vectors v_1,...,v_{k+1} whose cosets are linearly independent. For each of the 2^{k+1}-1 nonzero combinations v=Σc_iv_i, supply a witness input x_v with f(x_v)≠f(x_v+v). The verifier checks these polynomially many (because k is fixed) input/evaluation pairs. Such a certificate exists exactly when the quotient dimension exceeds k. QED.
+
+For variable k, the above certificate may contain 2^{k+1} pairs; do not infer a coNP upper bound uniformly in k. This theorem establishes that a universal polynomial-time, sound promise recognizer for even constant-rank linear-junta structure would imply P=NP.
+
+## 8. Affine-certificate extension and a Fourier-rank separation
+
+**Theorem V6 (affine positive certificates).** A deterministic epsilon-biased set with eps<2^-k (e.g. V1 with |D|=O(p²4^k)) hits every affine subspace of codimension≤k in F2^p. Consequently, it is a YES-hitting set for ANY Boolean predicate f whose accepting set, if nonempty, contains some affine subspace of codimension≤k. No common linear quotient or Fourier sparsity promise is required. The algorithm returns YES only upon finding an actual accepting assignment; it returns NO correctly under the stated positive-certificate promise. This is a direct classical corollary of small-bias sets, not a new PRG theorem.
+
+Fourier sparsity and Fourier span dimension are genuinely different. Consider the addressing function with k address bits selecting one of m=2^k data bits: f(a,d)=d_{a}. Its Fourier expansion has at most O(m 2^k)=O(m²) nonzero terms (one for each data bit and address character, plus a constant part), while its Fourier-support span contains all m data directions and the k address directions, so its Fourier dimension is Theta(m). Theorem V2 solves SAT on such promises in polynomial time via Fourier sparsity even though Theorem V3's rank-based bound can be exponential in p=Theta(m).
