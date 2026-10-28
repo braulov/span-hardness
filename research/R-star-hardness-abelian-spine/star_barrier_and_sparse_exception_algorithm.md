@@ -72,13 +72,23 @@ In fact the same factorization yields a **Boolean circuit for the whole acceptan
   g=O_G(p(r+1)+r).
 \]
 
+A sharper accounting replaces \(p(r+1)\) with the **segment-variable incidence**
+\[
+D=\sum_{j=0}^{r}|\{i\notin B:\text{variable }x_i\text{ occurs in segment }j\}|.
+\]
+Only the nonidentity \(g_{ij}\) factors need to be included. The circuit therefore has \(O_G(p+D+r)\) gates: each segment's product is computed in \(O_G(d_j)\) gates, with no dependence on the number of *repeated reads of a variable inside that segment*.
+
 Thus by standard parsimonious Tseitin + SAT-to-SetCover construction, the program admits a **deterministic pointwise** Set Cover reduction with
 \[
-\boxed{u,t,\text{budget}=O_G(p(r+1))}
+\boxed{u,t,\text{budget}=O_G(p+D+r)\ \le\ O_G(p(r+1))}
 \]
 and polynomial construction time, even if L=p^100. When r=O(1), this is a genuine **O(p)-universe** reduction for programs with arbitrarily dense, irregular rereads of nonexceptional variables.
 
 Observe carefully that Theorem R4's stronger 2^{O(r)} decision rate does **not** make the Set Cover universe O(p) when r grows; the direct circuit has size O(pr). Neither theorem handles the NP-hard star instances from R3, whose sole exceptional variable y occurs \(\Theta(L)\) times.
+
+
+
+**Stronger size consequence.** The desired \(O(p)\)-universe Set Cover reduction holds whenever \(D+r=O(p)\), even if \(r=\Theta(p)\). For example, there may be \(\Theta(p)\) exceptional separator instructions, and each intervening abelian segment may reread one or a few of the original variables an arbitrarily large number of times. The \(r=O(1)\) guarantee is only a convenient universal sufficient case (then \(D\le p(r+1)=O(p)\)). This semantic-segment version strictly extends the branch-P block enumeration scheme on abelian segments, because it allows a segment to depend on \(\Theta(p)\) distinct bits: its *group product* is computed with only \(O(p)\) gates, rather than enumerating \(2^p\) local assignments.
 
 ## 4. What this teaches for LGS -> Set Cover and NEXP goals
 
