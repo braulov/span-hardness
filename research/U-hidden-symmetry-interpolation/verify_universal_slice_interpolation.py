@@ -119,8 +119,6 @@ def main():
                 f(x) for x in product((0,1),repeat=p))
     print("PASS 180 cyclic-shift exact-count identities")
 
-if __name__=="__main__":main()
-    verify_more_group_quadrature()
 
 
 
@@ -166,3 +164,7 @@ def verify_more_group_quadrature():
                         weighted+=comb(p,w)*f(tuple(x))
             assert weighted==p*(p-1)*expected
     print("PASS 40 prime-field affine degree-two identities")
+
+if __name__=="__main__":
+    main()
+    verify_more_group_quadrature()
