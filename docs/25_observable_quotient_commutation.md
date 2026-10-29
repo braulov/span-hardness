@@ -90,3 +90,23 @@ Related context:
 - Seto–Teruyama, oblivious read-twice BP-SAT (2016); https://doi.org/10.1587/TRANSFUN.E99.A.1019
 - Anderson–Forbes–Saptharishi–Shpilka–Volk, read-k algebraic ABP PIT (2016); https://doi.org/10.4230/LIPIcs.CCC.2016.30
 - Checkpoints 21, 23 and 24 in this repository.
+
+## 7. Equivalent linear-observation formulation (a promising next interface)
+
+Let transition maps be represented by column-deterministic matrices over F_2: A_i^b e_s=e_{A_i^b(s)}, B_i^b e_s=e_{B_i^b(s)}. Let a be the row indicator vector of accepting states.
+
+The span O of all acceptance rows a^T V_x is computable in polynomial time: start with the one-dimensional row span <a^T> at the terminal layer and, walking BACKWARDS through the second sweep, replace L by span(L B_i^0 ∪ L B_i^1). The final L is exactly O because the second-sweep reads are disjoint inputs.
+
+Define the invisible subspace N_0=O^perp. Distinct basis states e_s,e_t are behaviorally equivalent iff e_s−e_t∈N_0 (over F_2 this is e_s+e_t). The greatest first-sweep invariant invisible subspace is found through
+
+   N_{j+1}=N_j ∩ ∩_{i,b} (A_i^b)^{-1}(N_j),
+
+stabilizing in at most w strict dimension drops. For deterministic first-sweep transitions, the state equivalence induced by N_infinity is precisely the coarsest behavior-preserving first-sweep congruence of Section 2. To see this, any pair difference contained in N_infinity stays invisible under arbitrary first-sweep words. Conversely the span of all differences within classes of the coarsest stable partition lies inside N_infinity.
+
+One can test whether all projected commutators vanish:
+
+   [A_i^b,A_j^c](F_2^w) ⊆ N_infinity.
+
+For deterministic maps this is exactly the quotient-commutativity criterion of Section 3. For weighted or linear branching programs, the subspace and commutator formulation may generalize more naturally than state partitions, but exact counting for arbitrary weighted models is NOT proved here.
+
+An open quantitative direction is whether low-rank *nonzero* projected commutators permit an algorithm with exponent governed by the cumulative observable defect, rather than by the number of variables. Rank-smallness alone is NOT a theorem of efficient composition.
