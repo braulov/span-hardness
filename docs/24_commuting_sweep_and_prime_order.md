@@ -50,7 +50,9 @@ Take p=2k and second-sweep order
   σ=(2,4,...,2k,1,3,...,2k−1).
 For all k≥2 this 'parallel alternation' permutation is simple (there are no nontrivial common intervals), hence its substitution tree has a single prime root of size p. Set all first-sweep maps to powers of one common permutation a (so they commute), while choosing arbitrary second-sweep transition maps, even noncommuting and irreversible. Then exact #SAT is solvable in O(p w^3) independently of this largest-possible prime root.
 
-With one exceptional first-sweep instruction b that does not commute with a, Theorem 2 applies with q=1 and gives O(p w^5) arithmetic operations, even though the complete first sweep is not abelian. An exhaustive pattern-avoidance calculation on p=4,6,...,14 gives deletion-to-separable distances 1,2,...,6; the linear formula for all p is a plausible combinatorial fact but is not needed for any theorem here.
+With one exceptional first-sweep instruction b that does not commute with a, Theorem 2 applies with q=1 and gives O(p w^5) arithmetic operations, even though the complete first sweep is not abelian.
+
+In fact the deletion-to-separable distance of this permutation is **exactly k−1 = p/2−1**, so the new polynomial algorithm covers a family where BOTH prior structural parameters are linear. Proof: Partition the values into k adjacent pairs {2j−1,2j}. If a subsequence retains both values of two distinct pairs i<j, then its four selected elements 2i,2j,2i−1,2j−1 appear in this relative order and form pattern 2413. Hence any separable subsequence retains both values of at most one pair, so has length ≤k+1. Equality is achieved by all k even values plus the odd value 1: their induced permutation is (2,3,...,k+1,1), a skew sum of an increasing list and a singleton and therefore separable. Thus the minimum number deleted is 2k−(k+1)=k−1. Also σ is simple: any proper contiguous interval confined to one half has gaps in its values, while any interval crossing the halves contains both 1 and 2k and therefore cannot have consecutive values unless it is the whole permutation.
 
 ## Proof/implementation checks
 
