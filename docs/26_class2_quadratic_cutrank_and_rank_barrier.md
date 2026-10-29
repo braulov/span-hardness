@@ -120,7 +120,7 @@ These are validation experiments, not literature novelty proofs.
 
 ## Literature checkpoints
 
-- Increasing oscillations as simple permutations with path inversion graphs: permutation-patterns literature, e.g. https://arxiv.org/abs/1306.0807
+- Increasing oscillations as simple permutations with path inversion graphs: permutation-patterns literature, e.g. https://arxiv.org/abs/1212.3346
 - Separable permutations correspond to cographs/P4-free inversion graphs: https://www.numdam.org/item/10.5802/cml.92.pdf
 - Cutrank and linear rank-width: https://doi.org/10.1016/j.tcs.2015.04.021
 - Seto and Teruyama, exact oblivious read-twice BP-SAT: https://doi.org/10.1587/transfun.E99.A.1019
