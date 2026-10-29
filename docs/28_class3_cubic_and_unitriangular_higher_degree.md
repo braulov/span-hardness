@@ -109,7 +109,11 @@ The same UT5 model using the increasing-oscillation second-read permutation and 
 - Goldmann–Russell and subsequent literature establish polynomial-time ProgramSat over FIXED finite nilpotent groups. See Idziak, Kawałek, Krzaczkowski, Weiß, ICALP 2022, https://doi.org/10.4230/LIPIcs.ICALP.2022.127. The model HERE differs: only the FIRST pass is required to lie in a nilpotent matrix group, while the SECOND pass consists of arbitrary deterministic maps sharing the same primary bits in an arbitrary order. Our theorem should not be misrepresented as a new algorithm for ordinary nilpotent-group ProgramSat.
 - Standard commutator collection: Clement–Majewicz–Zyman, *The Theory of Nilpotent Groups*, chapter on collection and basic commutators; see https://ideas.repec.org/h/spr/sprchp/978-3-319-66213-8_3.html.
 - For nonuniform polynomial-width BP-SAT as needed for the L/poly circuit-lower-bound goal, restriction to a fixed-depth unitriangular first sweep is still extremely narrow. No universal 2^{o(p)} algorithm follows, nor any NEXP circuit lower bound.
-- For growing d, the O(p^{d−1}) interpolation and O(p^{d−1}) monomial representation may be quasipolynomial or worse; the fixed-d proof is not an input-efficient algorithm for arbitrary d.
+- Quantitative extension to GROWING d: interpolation uses Σ_{j≤d−1} binom(p,j) ≤ p^{O(d)} evaluations, and Gaussian elimination on coefficient-matrix dimensions p^{O(d)} also takes p^{O(d)} time. The full algorithm therefore runs in
+
+    2^{O(r_d+d²+d log p)} poly(p,w)
+
+  (assuming polynomial-time matrix group actions). In particular, if d=O(log p), then c=O(log² p) and construction overhead 2^{O(log² p)}=2^{o(p)}. Thus r_d=o(p) SUFFICES for 2^{o(p)}poly(p,w) EVEN WITH LOGARITHMICALLY GROWING MATRIX DIMENSION. The natural faithful action of UT_d(F2) on F2^d has width w=2^d=poly(p) in this regime. This is a parameterized condition, not a universal upper bound on r_d. For d much larger, interpolation and the c-dimensional correction may be too expensive.
 - Finding a novel and useful family with intrinsically LARGE reordering complexity but r_d=o(p), not simply small displacement or separable order, remains a meaningful next test.
 - Priority of the generic low-degree discrepancy lemma and its applications is NOT verified.
 
