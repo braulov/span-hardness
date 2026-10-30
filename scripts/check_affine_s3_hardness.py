@@ -60,6 +60,35 @@ def walsh_support(vals,field):
         span*=2
     return sum(v!=0 for v in vals)
 
+
+def full_one_clause_copies():
+    """Exhaust all 2^20 occurrence assignments, including inconsistent copies."""
+    base=[('A','a'),('B','b'),('A','a'),('B','b'),('C','c'),
+          ('B','b'),('A','a'),('B','b'),('A','a'),('C','c')]
+    inverse=[(g,'d' if arg=='c' else arg) for g,arg in reversed(base)]
+    chronological=list(reversed(base+inverse))
+    masks={src:sum(1<<t for t,(_,src2) in enumerate(chronological)
+                   if src2==src) for src in 'abcd'}
+    maps={'A':A,'B':B,'C':C}
+    valid=accepted=0
+    for bits in range(1<<20):
+        vals={}
+        for src,group_mask in masks.items():
+            part=bits&group_mask
+            if part not in (0,group_mask):
+                break
+            vals[src]=int(part==group_mask)
+        else:
+            if vals['c'] and vals['d']:
+                continue
+            valid+=1
+            permutation=ID
+            for t,(letter,_) in enumerate(chronological):
+                if bits>>t&1:
+                    permutation=mul(maps[letter],permutation)
+            accepted+=permutation[0]==0
+    assert (valid,accepted)==(12,10),(valid,accepted)
+
 def main():
     r2=mul(R,R)
     for a,b,c in product((0,1),repeat=3):
@@ -73,6 +102,7 @@ def main():
     for k in (3,5,7,9,11):
         vals=[int(mask.bit_count()%4==0) for mask in range(1<<k)]
         assert walsh_support(vals,5)==1<<k
+    full_one_clause_copies()
     print('PASS: 8 S3 commutator cases, 300 #2SAT reductions,',
           '5 full F5 Fourier-support tests')
 
