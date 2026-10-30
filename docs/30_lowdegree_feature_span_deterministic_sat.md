@@ -133,3 +133,35 @@ This is the first DETERMISTIC input-efficient SAT algorithm in this branch that 
 The obstruction to a universal algorithm for arbitrary polynomial-width branching programs is now more precise: the first-sweep endpoint indicators f_s may have F2 algebraic degree Θ(p), even for very small widths (Barrington-type AND programs). Low degree is a strong computational restriction but by no means universal.
 
 The natural next direction is to replace monomial degree D by a smaller effectively constructible LINEAR FEATURE SPACE of functions in which all endpoint predicates f_s lie and in which each second-read update acts linearly. A polynomial-dimensional such space would yield polynomial SAT; an input-efficient 2^{o(p)} feature dimension for all polynomial-width BPs would be a major breakthrough. It is not currently known.
+
+## Stronger result: universal RELATIVE hitting set of size ≤M, no ANF needed
+
+The feature-span DP can be organized to retain only **actual accepted assignments** as representative basis vectors. Then it constructs a hitting set independent of the unknown polynomial.
+
+THEOREM (degree-D hitting set for read-once BP languages). Given ANY deterministic read-once BP H of width w on p Boolean variables and D≤p, we can construct deterministically in p^{O(D)}poly(p,w) time a set
+
+    K⊆H^{-1}(1), |K|≤M=Σ_{j=0}^D binom(p,j),
+
+such that for EVERY polynomial f∈F2[x_1,...,x_p] of Boolean multilinear degree ≤D,
+
+    (∃x:H(x)=1 AND f(x)=1)
+    iff
+    (∃x∈K:f(x)=1).
+
+Proof: Construct the feature vector Φ_D(x)∈F2^M. At each read-once layer and each BP state retain a basis of partial-assignment feature vectors, SELECTED FROM ACTUAL reachable partial assignments, together with their assignment prefixes. On reading the next bit, apply the linear feature map L_{i,b} to each stored representative and append bit b to its concrete prefix, then keep a maximal independent subset by Gaussian elimination. The represented feature span stays exact by induction. At acceptance combine the bases and keep a maximal independent subset K of actual accepted full assignments. For any degree-D f, the evaluation functional c_f·Φ_D is linear, so if it vanishes on K then it vanishes on the full accepted-language span, and conversely.
+
+This **eliminates the need to compute any ANF coefficient** of the first-sweep state predicates. For each possible middle state s, construct K_s for the second sweep started at s. Then evaluate the original FIRST sweep on every x∈K_s, and accept iff some evaluation returns s. If the true program has an accepting input x, then its first endpoint is some s, x belongs to H_s^{-1}(1), and the bounded-degree indicator f_s is nonzero there; the hitting property guarantees some y∈K_s with f_s(y)=1, giving an ACTUAL accepting assignment. Hence deterministic SAT and witness search in p^{O(D)}poly(p,w), using the degree assumption only in the correctness proof.
+
+This is more general and simpler than the coefficient-expansion theorem in Sections 1–3: it applies even if constructing ANFs would be inconvenient, and outputs witnesses directly. The hitting set is universal for ALL degree-D polynomials, not tailored to f_s. For an unrestricted language H={0,1}^p this reduces to the familiar low-weight-≤D evaluation set (up to choice of basis). For a constrained read-once BP language it is a RELATIVE low-degree hitting set.
+
+Additional independent verification: /mnt/data/check_relative_degree_hitting.py ran 96 random UT4 affine first-sweep / arbitrary irreversible second-sweep programs (p≤8), constructing the actual representative accepted assignments and comparing SAT with full enumeration; every answer agreed, and each returned witness was checked by original direct simulation.
+
+### A strict advantage over the old cutrank parameter
+
+Take first-sweep transitions in UT3(F2), alternating between X=I+E12 on odd variable indices and Y=I+E23 on even indices, controlled by x_i (with identity transitions for bit zero). Let second-sweep order be the parallel alternation σ=(2,4,...,2k,1,3,...,2k−1), p=2k. Across the cut separating the even and odd halves of σ, the class-two quadratic discrepancy has a k×k triangular matrix of commutator coefficients, so the old quadratic cutrank is r=k=Θ(p) (checkpoint 27). However the natural affine action on F2² has only two output bits of degrees ≤2 and ≤1, so each endpoint indicator has degree D≤3. The NEW relative-hitting-set algorithm decides SAT in polynomial time, regardless of the second-sweep transition tables. Thus it can completely bypass linear cutrank for some genuinely noncommutative first sweeps.
+
+### Interpretation
+
+The dimension M of the monomial-feature space measures enough information to SEPARATE first-sweep endpoint predicates on the language accepted by each second-sweep start state. A broader algorithm could use ANY efficiently constructible feature representation Ψ(x)∈F^m such that (i) each first-sweep endpoint predicate is a linear functional of Ψ, and (ii) the next-read maps Ψ(prefix)→Ψ(prefix,b) are efficiently given LINEAR operators for the second-read order. Replacing M with 2^{o(p)} in a substantially wider class is the remaining program. No such universal feature space is claimed.
+
+Related literature: white-box PIT of read-once oblivious ABPs (Raz–Shpilka, Forbes–Shpilka), and representative-set/linear-span algorithms. The exact priority of the relative low-degree hitting-set statement is NOT audited.
